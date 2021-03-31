@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/mimemagicrb/mimemagic'
   s.license = 'MIT'
 
-  s.required_ruby_version = '>= 2.1.0'
+  s.required_ruby_version = Gem::Requirement.new('>= 2.1.0'.freeze)
 
   s.add_dependency('nokogiri', '~> 1')
   s.add_dependency('rake')
