@@ -32,9 +32,9 @@ jobs:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
         env:
-          BUNDLE_WITHOUT: docs
+          BUNDLE_WITHOUT: documentation
       - run: echo "{RUBYOPT}={--enable-frozen-string-literal}" >> $GITHUB_ENV
         if: ${{ matrix.frozen-string }}
-      - run: bundle exec rake test
+      - run: bundle exec rake test --trace
         env:
           RUBYARCHDIR: './lib'
