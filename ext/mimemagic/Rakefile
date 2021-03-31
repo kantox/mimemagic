@@ -25,6 +25,7 @@ desc "Build a file pointing at the database"
 task :default do
   mime_database_path = locate_mime_database
   target_dir = "#{ENV.fetch("RUBYARCHDIR", "../lib")}/mimemagic"
+  puts target_dir
   mkdir_p target_dir
 
   open("#{target_dir}/path.rb", "w") do |f|
