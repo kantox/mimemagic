@@ -25,10 +25,21 @@ desc "Build a file pointing at the database"
 task :default do
   mime_database_path = locate_mime_database
   target_dir = "#{ENV.fetch("RUBYARCHDIR", "../lib")}/mimemagic"
-  mkdir_p target_dir
+  begin
+    mkdir_p target_dir
+  rescue ArgumentError
+    #
+    # rake >= 13 required on Ruby >= 3.0 due to the hash keyword argument deprecation:
+    # https://github.com/ruby/rake/commit/baa23cc8a8cc624bc8f46c8a55d2f0caade568ea#diff-a8d48595711725bd3c49e3c84f736b0ac6a0da37cc13ceb49c7ff4f815014cfb
+    #
+    # This means we're not using `verbose` and `nowrite` rake features for this
+    # To be cleaned with required_ruby_version >= 2.2 or rake >= 13
+    #
+    FileUtils.mkdir_p target_dir
+  end
 
   open("#{target_dir}/path.rb", "w") do |f|
-    f.print(<<~SOURCE
+    f.print(<<-SOURCE.gsub(/^ {3}/, "")
       class MimeMagic
         DATABASE_PATH="#{mime_database_path}"
       end

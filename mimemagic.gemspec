@@ -19,10 +19,10 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/mimemagicrb/mimemagic'
   s.license = 'MIT'
 
+  s.required_ruby_version = Gem::Requirement.new('>= 2.1.0'.freeze)
+
   s.add_dependency('nokogiri', '~> 1')
   s.add_dependency('rake')
-
-  s.add_development_dependency('minitest', '~> 5.14')
 
   if s.respond_to?(:metadata)
     s.metadata['changelog_uri'] = "https://github.com/mimemagicrb/mimemagic/blob/master/CHANGELOG.md"
